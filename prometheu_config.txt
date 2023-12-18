@@ -1,0 +1,12 @@
+
+  - job_name: "provisioner"
+
+    static_configs:
+      - targets: ["localhost:8080"]
+
+  - job_name: "identity"
+
+    static_configs:
+      - targets: ["localhost:8081"]
+
+
