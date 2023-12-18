@@ -1,7 +1,7 @@
 version: "3"
 services:
   provisioner-ms:
-    image: bi-fincn-provisioner-service:stableV4.0
+    image: bi-fincn-provisioner-service:latest
     ports:
       - "2020:2020"
       - "8080:8080"
@@ -68,7 +68,7 @@ services:
         ipv4_address: ${PROVISIONER_IP}
 
   identity-ms:
-    image: bi-fincn-identity-service:stableV4.0
+    image: bi-fincn-identity-service:latest
     ports:
       - "2021:2021"
       - "8081:8081"
