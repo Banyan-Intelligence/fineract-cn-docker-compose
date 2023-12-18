@@ -1,9 +1,11 @@
-version: '3'
+version: "3"
 services:
   provisioner-ms:
-    image: apache/fineract-cn-provisioner:latest
+    image: bi-fincn-provisioner-service:latest5.0
     ports:
       - "2020:2020"
+      - "9010:9010"
+      - "8080:8080"
     environment:
       activemq.brokerUrl: ${ACTIVEMQ_BROKER_URL}
       bonecp.acquireIncrement: 1
@@ -42,21 +44,34 @@ services:
       system.publicKey.exponent: ${PUBLIC_KEY_EXPONENT}
       system.publicKey.modulus: ${PUBLIC_KEY_MODULUS}
       system.publicKey.timestamp: ${PUBLIC_KEY_TIMESTAMP}
+      keycloak.enabled: "true"
+      authentication.service.keycloak: "true"
+      authentication.service.anubis: "false"
+      keycloak.auth-server-url: https://localhost:8180/auth
+      keycloak.ssl-required: external
+      keycloak.confidential-port: 443
+      keycloak.realm: keycloak-realm
+      keycloak.resource: kecloak-client
+      keycloak.public-client: "true"
+      keycloak.principal-attribute: preferred_username
+      keycloak.bearer-only: "true"
+      conf.enableAccountLevelAccessVerification: "false"
+      fin.keycloak.realm.publicKey: keycloak-rsa-public-key
+      keycloak.use-resource-role-mappings: "true"
     deploy:
       replicas: 1
-      restart_policy:
-        condition: any
-        delay: 10s
-        max_attempts: 3
+    restart: "no"
     networks:
       external_tools_default:
       fineract:
         ipv4_address: ${PROVISIONER_IP}
 
   identity-ms:
-    image: apache/fineract-cn-identity:latest
+    image: bi-fincn-identity-service:latest
     ports:
       - "2021:2021"
+      - "9010:9010"
+      - "8080:8080"
     environment:
       activemq.brokerUrl: ${ACTIVEMQ_BROKER_URL}
       cassandra.cl.delete: ONE
@@ -87,6 +102,20 @@ services:
       system.publicKey.exponent: ${PUBLIC_KEY_EXPONENT}
       system.publicKey.modulus: ${PUBLIC_KEY_MODULUS}
       system.publicKey.timestamp: ${PUBLIC_KEY_TIMESTAMP}
+      keycloak.enabled: "true"
+      authentication.service.keycloak: "true"
+      authentication.service.anubis: "false"
+      keycloak.auth-server-url: https://localhost:8180/auth
+      keycloak.ssl-required: external
+      keycloak.confidential-port: 443
+      keycloak.realm: keycloak-realm
+      keycloak.resource: kecloak-client
+      keycloak.public-client: "true"
+      keycloak.principal-attribute: preferred_username
+      keycloak.bearer-only: "true"
+      conf.enableAccountLevelAccessVerification: "false"
+      fin.keycloak.realm.publicKey: keycloak-rsa-public-key
+      keycloak.use-resource-role-mappings: "true"
     deploy:
       replicas: 1
       restart_policy:
