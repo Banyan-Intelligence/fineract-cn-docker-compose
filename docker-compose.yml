@@ -130,9 +130,10 @@ services:
         ipv4_address: ${IDENTITY_IP}
 
   rhythm-ms:
-    image: apache/fineract-cn-rhythm:latest
+    image: bi-fincn-rhythm-service:latest
     ports:
       - "2022:2022"
+      - "8082:8082"
     environment:
       activemq.brokerUrl: ${ACTIVEMQ_BROKER_URL}
       bonecp.acquireIncrement: 1
@@ -172,6 +173,22 @@ services:
       system.publicKey.exponent: ${PUBLIC_KEY_EXPONENT}
       system.publicKey.modulus: ${PUBLIC_KEY_MODULUS}
       system.publicKey.timestamp: ${PUBLIC_KEY_TIMESTAMP}
+      keycloak.enabled: "true"
+      authentication.service.keycloak: "true"
+      authentication.service.anubis: "false"
+      keycloak.auth-server-url: https://localhost:8180/auth
+      keycloak.ssl-required: external
+      keycloak.confidential-port: 443
+      keycloak.realm: keycloak-realm
+      keycloak.resource: kecloak-client
+      keycloak.public-client: "true"
+      keycloak.principal-attribute: preferred_username
+      keycloak.bearer-only: "true"
+      conf.enableAccountLevelAccessVerification: "false"
+      fin.keycloak.realm.publicKey: keycloak-rsa-public-key
+      keycloak.use-resource-role-mappings: "true"
+    volumes: 
+      - /mnt/logs:/mnt/logs       
     deploy:
       replicas: 1
       restart_policy:
@@ -182,9 +199,10 @@ services:
         ipv4_address: ${RHYTHM_IP}
 
   office-ms:
-    image: apache/fineract-cn-office:latest
+    image: bi-fincn-office-service:latest
     ports:
       - "2023:2023"
+      - "2083:2083"      
     environment:
       activemq.brokerUrl: ${ACTIVEMQ_BROKER_URL}
       bonecp.acquireIncrement: 1
@@ -221,15 +239,32 @@ services:
       system.publicKey.exponent: ${PUBLIC_KEY_EXPONENT}
       system.publicKey.modulus: ${PUBLIC_KEY_MODULUS}
       system.publicKey.timestamp: ${PUBLIC_KEY_TIMESTAMP}
+      keycloak.enabled: "true"
+      authentication.service.keycloak: "true"
+      authentication.service.anubis: "false"
+      keycloak.auth-server-url: https://localhost:8180/auth
+      keycloak.ssl-required: external
+      keycloak.confidential-port: 443
+      keycloak.realm: keycloak-realm
+      keycloak.resource: kecloak-client
+      keycloak.public-client: "true"
+      keycloak.principal-attribute: preferred_username
+      keycloak.bearer-only: "true"
+      conf.enableAccountLevelAccessVerification: "false"
+      fin.keycloak.realm.publicKey: keycloak-rsa-public-key
+      keycloak.use-resource-role-mappings: "true"
+    volumes: 
+      - /mnt/logs:/mnt/logs        
     networks:
       external_tools_default:
       fineract:
         ipv4_address: ${OFFICE_IP}
 
   customer-ms:
-    image: apache/fineract-cn-customer:latest
+    image: bi-fincn-customer-service:latest
     ports:
       - "2024:2024"
+      - "8084:8084"
     environment:
       activemq.brokerUrl: ${ACTIVEMQ_BROKER_URL}
       bonecp.acquireIncrement: 1
@@ -263,15 +298,32 @@ services:
       system.publicKey.exponent: ${PUBLIC_KEY_EXPONENT}
       system.publicKey.modulus: ${PUBLIC_KEY_MODULUS}
       system.publicKey.timestamp: ${PUBLIC_KEY_TIMESTAMP}
+      keycloak.enabled: "true"
+      authentication.service.keycloak: "true"
+      authentication.service.anubis: "false"
+      keycloak.auth-server-url: https://localhost:8180/auth
+      keycloak.ssl-required: external
+      keycloak.confidential-port: 443
+      keycloak.realm: keycloak-realm
+      keycloak.resource: kecloak-client
+      keycloak.public-client: "true"
+      keycloak.principal-attribute: preferred_username
+      keycloak.bearer-only: "true"
+      conf.enableAccountLevelAccessVerification: "false"
+      fin.keycloak.realm.publicKey: keycloak-rsa-public-key
+      keycloak.use-resource-role-mappings: "true"
+    volumes: 
+      - /mnt/logs:/mnt/logs         
     networks:
       external_tools_default:
       fineract:
         ipv4_address: ${CUSTOMER_IP}
 
   accounting-ms:
+    image: bi-fincn-accounting-service:latest
     ports:
       - "2025:2025"
-    image: apache/fineract-cn-accounting:latest
+      - "8085:8085"
     environment:
       activemq.brokerUrl: ${ACTIVEMQ_BROKER_URL}
       bonecp.acquireIncrement: 1
@@ -309,15 +361,32 @@ services:
       system.publicKey.exponent: ${PUBLIC_KEY_EXPONENT}
       system.publicKey.modulus: ${PUBLIC_KEY_MODULUS}
       system.publicKey.timestamp: ${PUBLIC_KEY_TIMESTAMP}
+      keycloak.enabled: "true"
+      authentication.service.keycloak: "true"
+      authentication.service.anubis: "false"
+      keycloak.auth-server-url: https://localhost:8180/auth
+      keycloak.ssl-required: external
+      keycloak.confidential-port: 443
+      keycloak.realm: keycloak-realm
+      keycloak.resource: kecloak-client
+      keycloak.public-client: "true"
+      keycloak.principal-attribute: preferred_username
+      keycloak.bearer-only: "true"
+      conf.enableAccountLevelAccessVerification: "false"
+      fin.keycloak.realm.publicKey: keycloak-rsa-public-key
+      keycloak.use-resource-role-mappings: "true"
+    volumes: 
+      - /mnt/logs:/mnt/logs        
     networks:
       external_tools_default:
       fineract:
         ipv4_address: ${ACCOUNTING_IP}
 
   portfolio-ms:
-    image: apache/fineract-cn-portfolio:latest
+    image: bi-fincn-portfolio-service:latest
     ports:
       - "2026:2026"
+      - "8086:8086"
     environment:
       activemq.brokerUrl: ${ACTIVEMQ_BROKER_URL}
       bonecp.acquireIncrement: 1
@@ -356,15 +425,32 @@ services:
       system.publicKey.exponent: ${PUBLIC_KEY_EXPONENT}
       system.publicKey.modulus: ${PUBLIC_KEY_MODULUS}
       system.publicKey.timestamp: ${PUBLIC_KEY_TIMESTAMP}
+      keycloak.enabled: "true"
+      authentication.service.keycloak: "true"
+      authentication.service.anubis: "false"
+      keycloak.auth-server-url: https://localhost:8180/auth
+      keycloak.ssl-required: external
+      keycloak.confidential-port: 443
+      keycloak.realm: keycloak-realm
+      keycloak.resource: kecloak-client
+      keycloak.public-client: "true"
+      keycloak.principal-attribute: preferred_username
+      keycloak.bearer-only: "true"
+      conf.enableAccountLevelAccessVerification: "false"
+      fin.keycloak.realm.publicKey: keycloak-rsa-public-key
+      keycloak.use-resource-role-mappings: "true"
+    volumes: 
+      - /mnt/logs:/mnt/logs       
     networks:
       external_tools_default:
       fineract:
         ipv4_address: ${PORTFOLIO_IP}
 
   deposit-ms:
-    image: apache/fineract-cn-deposit-account-management:latest
+    image: bi-fincn-deposit-account-management-service:latest
     ports:
       - "2027:2027"
+      - "8087:8087"
     environment:
       activemq.brokerUrl: ${ACTIVEMQ_BROKER_URL}
       cassandra.cl.delete: ONE
@@ -394,6 +480,22 @@ services:
       system.publicKey.exponent: ${PUBLIC_KEY_EXPONENT}
       system.publicKey.modulus: ${PUBLIC_KEY_MODULUS}
       system.publicKey.timestamp: ${PUBLIC_KEY_TIMESTAMP}
+      keycloak.enabled: "true"
+      authentication.service.keycloak: "true"
+      authentication.service.anubis: "false"
+      keycloak.auth-server-url: https://localhost:8180/auth
+      keycloak.ssl-required: external
+      keycloak.confidential-port: 443
+      keycloak.realm: keycloak-realm
+      keycloak.resource: kecloak-client
+      keycloak.public-client: "true"
+      keycloak.principal-attribute: preferred_username
+      keycloak.bearer-only: "true"
+      conf.enableAccountLevelAccessVerification: "false"
+      fin.keycloak.realm.publicKey: keycloak-rsa-public-key
+      keycloak.use-resource-role-mappings: "true"
+    volumes: 
+      - /mnt/logs:/mnt/logs         
     networks:
       external_tools_default:
       fineract:
@@ -402,9 +504,10 @@ services:
           - deposit-account-management-ms
 
   teller-ms:
-    image: apache/fineract-cn-teller:latest
+    image: bi-fincn-teller-service:latest
     ports:
       - "2028:2028"
+      - "8088:8088"
     environment:
       activemq.brokerUrl: ${ACTIVEMQ_BROKER_URL}
       cassandra.cl.delete: ONE
@@ -434,15 +537,32 @@ services:
       system.publicKey.exponent: ${PUBLIC_KEY_EXPONENT}
       system.publicKey.modulus: ${PUBLIC_KEY_MODULUS}
       system.publicKey.timestamp: ${PUBLIC_KEY_TIMESTAMP}
+      keycloak.enabled: "true"
+      authentication.service.keycloak: "true"
+      authentication.service.anubis: "false"
+      keycloak.auth-server-url: https://localhost:8180/auth
+      keycloak.ssl-required: external
+      keycloak.confidential-port: 443
+      keycloak.realm: keycloak-realm
+      keycloak.resource: kecloak-client
+      keycloak.public-client: "true"
+      keycloak.principal-attribute: preferred_username
+      keycloak.bearer-only: "true"
+      conf.enableAccountLevelAccessVerification: "false"
+      fin.keycloak.realm.publicKey: keycloak-rsa-public-key
+      keycloak.use-resource-role-mappings: "true"
+    volumes: 
+      - /mnt/logs:/mnt/logs        
     networks:
       external_tools_default:
       fineract:
         ipv4_address: ${TELLER_IP}
 
   reporting-ms:
-    image: apache/fineract-cn-reporting:latest
+    image: bi-fincn-reporting-service:latest
     ports:
       - "2029:2029"
+      - "8089:8089"
     environment:
       activemq.brokerUrl: ${ACTIVEMQ_BROKER_URL}
       cassandra.cl.delete: ONE
@@ -469,15 +589,32 @@ services:
       system.publicKey.exponent: ${PUBLIC_KEY_EXPONENT}
       system.publicKey.modulus: ${PUBLIC_KEY_MODULUS}
       system.publicKey.timestamp: ${PUBLIC_KEY_TIMESTAMP}
+      keycloak.enabled: "true"
+      authentication.service.keycloak: "true"
+      authentication.service.anubis: "false"
+      keycloak.auth-server-url: https://localhost:8180/auth
+      keycloak.ssl-required: external
+      keycloak.confidential-port: 443
+      keycloak.realm: keycloak-realm
+      keycloak.resource: kecloak-client
+      keycloak.public-client: "true"
+      keycloak.principal-attribute: preferred_username
+      keycloak.bearer-only: "true"
+      conf.enableAccountLevelAccessVerification: "false"
+      fin.keycloak.realm.publicKey: keycloak-rsa-public-key
+      keycloak.use-resource-role-mappings: "true"
+    volumes: 
+      - /mnt/logs:/mnt/logs       
     networks:
       external_tools_default:
       fineract:
         ipv4_address: ${REPORTING_IP}
 
   cheques-ms:
-    image: apache/fineract-cn-cheques:latest
+    image: bi-fincn-cheques-service:latest
     ports:
       - "2030:2030"
+      - "8090:8090"
     environment:
       activemq.brokerUrl: ${ACTIVEMQ_BROKER_URL}
       cassandra.cl.delete: ONE
@@ -504,15 +641,32 @@ services:
       system.publicKey.exponent: ${PUBLIC_KEY_EXPONENT}
       system.publicKey.modulus: ${PUBLIC_KEY_MODULUS}
       system.publicKey.timestamp: ${PUBLIC_KEY_TIMESTAMP}
+      keycloak.enabled: "true"
+      authentication.service.keycloak: "true"
+      authentication.service.anubis: "false"
+      keycloak.auth-server-url: https://localhost:8180/auth
+      keycloak.ssl-required: external
+      keycloak.confidential-port: 443
+      keycloak.realm: keycloak-realm
+      keycloak.resource: kecloak-client
+      keycloak.public-client: "true"
+      keycloak.principal-attribute: preferred_username
+      keycloak.bearer-only: "true"
+      conf.enableAccountLevelAccessVerification: "false"
+      fin.keycloak.realm.publicKey: keycloak-rsa-public-key
+      keycloak.use-resource-role-mappings: "true"
+    volumes: 
+      - /mnt/logs:/mnt/logs       
     networks:
       external_tools_default:
       fineract:
         ipv4_address: ${CHEQUES_IP}
 
   payroll-ms:
-    image: apache/fineract-cn-payroll:latest
+    image: bi-fincn-payroll-service:latest
     ports:
       - "2031:2031"
+      - "8091:8091"
     environment:
       activemq.brokerUrl: ${ACTIVEMQ_BROKER_URL}
       cassandra.cl.delete: ONE
@@ -539,15 +693,32 @@ services:
       system.publicKey.exponent: ${PUBLIC_KEY_EXPONENT}
       system.publicKey.modulus: ${PUBLIC_KEY_MODULUS}
       system.publicKey.timestamp: ${PUBLIC_KEY_TIMESTAMP}
+      keycloak.enabled: "true"
+      authentication.service.keycloak: "true"
+      authentication.service.anubis: "false"
+      keycloak.auth-server-url: https://localhost:8180/auth
+      keycloak.ssl-required: external
+      keycloak.confidential-port: 443
+      keycloak.realm: keycloak-realm
+      keycloak.resource: kecloak-client
+      keycloak.public-client: "true"
+      keycloak.principal-attribute: preferred_username
+      keycloak.bearer-only: "true"
+      conf.enableAccountLevelAccessVerification: "false"
+      fin.keycloak.realm.publicKey: keycloak-rsa-public-key
+      keycloak.use-resource-role-mappings: "true"
+    volumes: 
+      - /mnt/logs:/mnt/logs       
     networks:
       external_tools_default:
       fineract:
         ipv4_address: ${PAYROLL_IP}
 
   group-ms:
-    image: apache/fineract-cn-group:latest
+    image: bi-fincn-group-service:latest
     ports:
       - "2032:2032"
+      - "8092:8092"
     environment:
       activemq.brokerUrl: ${ACTIVEMQ_BROKER_URL}
       cassandra.cl.delete: ONE
@@ -574,15 +745,32 @@ services:
       system.publicKey.exponent: ${PUBLIC_KEY_EXPONENT}
       system.publicKey.modulus: ${PUBLIC_KEY_MODULUS}
       system.publicKey.timestamp: ${PUBLIC_KEY_TIMESTAMP}
+      keycloak.enabled: "true"
+      authentication.service.keycloak: "true"
+      authentication.service.anubis: "false"
+      keycloak.auth-server-url: https://localhost:8180/auth
+      keycloak.ssl-required: external
+      keycloak.confidential-port: 443
+      keycloak.realm: keycloak-realm
+      keycloak.resource: kecloak-client
+      keycloak.public-client: "true"
+      keycloak.principal-attribute: preferred_username
+      keycloak.bearer-only: "true"
+      conf.enableAccountLevelAccessVerification: "false"
+      fin.keycloak.realm.publicKey: keycloak-rsa-public-key
+      keycloak.use-resource-role-mappings: "true"
+    volumes: 
+      - /mnt/logs:/mnt/logs        
     networks:
       external_tools_default:
       fineract:
         ipv4_address: ${GROUP_IP}
 
   notifications-ms:
-    image: apache/fineract-cn-notifications:latest
+    image: bi-fincn-notifications-service:latest
     ports:
       - "2033:2033"
+      - "8093:8093"
     environment:
       activemq.brokerUrl: ${ACTIVEMQ_BROKER_URL}
       cassandra.cl.delete: ONE
@@ -609,6 +797,22 @@ services:
       system.publicKey.exponent: ${PUBLIC_KEY_EXPONENT}
       system.publicKey.modulus: ${PUBLIC_KEY_MODULUS}
       system.publicKey.timestamp: ${PUBLIC_KEY_TIMESTAMP}
+      keycloak.enabled: "true"
+      authentication.service.keycloak: "true"
+      authentication.service.anubis: "false"
+      keycloak.auth-server-url: https://localhost:8180/auth
+      keycloak.ssl-required: external
+      keycloak.confidential-port: 443
+      keycloak.realm: keycloak-realm
+      keycloak.resource: kecloak-client
+      keycloak.public-client: "true"
+      keycloak.principal-attribute: preferred_username
+      keycloak.bearer-only: "true"
+      conf.enableAccountLevelAccessVerification: "false"
+      fin.keycloak.realm.publicKey: keycloak-rsa-public-key
+      keycloak.use-resource-role-mappings: "true"
+    volumes: 
+      - /mnt/logs:/mnt/logs         
     networks:
       external_tools_default:
       fineract:
