@@ -819,7 +819,7 @@ services:
         ipv4_address: ${NOTIFICATIONS_IP}
 
   fims-web-app:
-    image: apache/fineract-cn-fims-web-app:latest
+    image: bi-fincn-fims-web-app-service:latest
     ports:
       - "8888:8888"
     networks:
@@ -829,8 +829,7 @@ services:
 
 networks:
   external_tools_default:
-    external:
-      name: external_tools_default
+    external: true
   fineract:
     driver: bridge
     ipam:
