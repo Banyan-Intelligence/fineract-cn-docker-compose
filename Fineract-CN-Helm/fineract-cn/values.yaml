@@ -1,6 +1,6 @@
 namespace: "fineract-cn"
 accounting:
-  image: "419830066942.dkr.ecr.ap-south-1.amazonaws.com/fineract-cn:accounting"
+  image: "bi-fincn-accounting-service:latest"
 
 activemq:
   image: "docker.io/rmohr/activemq:5.14.5"
@@ -8,44 +8,44 @@ activemq:
 cassandra:
   image: "docker.io/cassandra:3.11"
 
-# cheques:
-#   image: "apache/fineract-cn-cheques:latest"
+cheques:
+  image: "bi-fincn-cheques-service:latest"
 
 customer:
-  image: "419830066942.dkr.ecr.ap-south-1.amazonaws.com/fineract-cn:customer"
+  image: "bi-fincn-customer-service:latest"
 
 deposit:
-  image: "419830066942.dkr.ecr.ap-south-1.amazonaws.com/fineract-cn:deposit-account-management"
+  image: "bi-fincn-deposit-account-management-service:latest"
 
 # eureka:
 #   image: "docker.io/anh3h/eureka-server:latest"
 
 group:
-  image: "419830066942.dkr.ecr.ap-south-1.amazonaws.com/fineract-cn:group"
+  image: "bi-fincn-group-service:latest"
 
 identity:
-  image: "419830066942.dkr.ecr.ap-south-1.amazonaws.com/fineract-cn:identity"
+  image: "bi-fincn-identity-service:latest"
 
 notifications:
-  image: "benura123/notification:v1.0.1"
+  image: "bi-fincn-notifications-service:latest"
 
 office:
-  image: "419830066942.dkr.ecr.ap-south-1.amazonaws.com/fineract-cn:office"
+  image: "bi-fincn-office-service:latest"
 
 payroll:
-  image: "benura123/payroll:v1.0.1"
+  image: "bi-fincn-payroll-service:latest"
 
 portfolio:
-  image: "419830066942.dkr.ecr.ap-south-1.amazonaws.com/fineract-cn:portfolio"
+  image: "bi-fincn-portfolio-service:latest"
 
 provisioner:
-  image: "419830066942.dkr.ecr.ap-south-1.amazonaws.com/fineract-cn:provisioner"
+  image: "bi-fincn-provisioner-service:latest"
 
 reporting:
-  image: "benura123/reporting:v1.0.1"
+  image: "bi-fincn-reporting-service:latest"
 
 rhythm:
-  image: "419830066942.dkr.ecr.ap-south-1.amazonaws.com/fineract-cn:rhythm"
+  image: "bi-fincn-rhythm-service:latest"
 
 teller:
-  image: "benura123/teller:v1.0.1"
+  image: "bi-fincn-teller-service:latest"
