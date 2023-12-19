@@ -9,4 +9,62 @@
     static_configs:
       - targets: ["localhost:8081"]
 
+  - job_name: "rhythm"
 
+    static_configs:
+      - targets: ["localhost:8082"]
+
+  - job_name: "office"
+
+    static_configs:
+      - targets: ["localhost:8083"]
+
+  - job_name: "customer"
+
+    static_configs:
+      - targets: ["localhost:8084"]
+
+  - job_name: "accounting"
+
+    static_configs:
+      - targets: ["localhost:8085"]
+
+  - job_name: "portfolio"
+
+    static_configs:
+      - targets: ["localhost:8086"]     
+
+  - job_name: "deposit-account-management"
+
+    static_configs:
+      - targets: ["localhost:8087"]
+
+  - job_name: "teller"
+
+    static_configs:
+      - targets: ["localhost:8088"]
+
+  - job_name: "reporting"
+
+    static_configs:
+      - targets: ["localhost:8089"]      
+
+  - job_name: "cheques"
+
+    static_configs:
+      - targets: ["localhost:8090"]
+
+  - job_name: "payroll"
+
+    static_configs:
+      - targets: ["localhost:8091"]   
+
+  - job_name: "group"
+
+    static_configs:
+      - targets: ["localhost:8092"]                          
+
+  - job_name: "notifications"
+
+    static_configs:
+      - targets: ["localhost:8093"]                
