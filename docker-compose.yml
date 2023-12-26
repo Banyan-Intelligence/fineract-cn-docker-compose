@@ -202,7 +202,7 @@ services:
     image: bi-fincn-office-service:latest
     ports:
       - "2023:2023"
-      - "2083:2083"      
+      - "8083:8083"      
     environment:
       activemq.brokerUrl: ${ACTIVEMQ_BROKER_URL}
       bonecp.acquireIncrement: 1
